@@ -1,0 +1,75 @@
+DATA SEGMENT
+
+
+Num1 DB "ENTER FIRST NUMBER: $"
+Num2 DB "ENTER SECOND NUMBER: $"
+Num3 DB "ADDITION RESULT IS: $"
+
+ENDS
+
+CODE SEGMENT
+ASSUME DS:DATA CS:CODE
+
+Start:
+MOV AX,@DATA
+MOV DS,AX
+
+LEA DX,Num1
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21H
+
+MOV BL,AL 
+
+NewLine1:
+    MOV dl, 10
+    MOV ah, 02h
+    INT 21h
+    MOV dl, 13
+    MOV ah, 02h
+    INT 21h
+
+LEA DX,Num2
+MOV AH,9
+INT 21H
+
+MOV AH,1
+INT 21H
+
+MOV CL,AL
+
+NewLine2:
+    MOV dl, 10
+    MOV ah, 02h
+    INT 21h
+    MOV dl, 13
+    MOV ah, 02h
+    INT 21h
+
+
+
+LEA DX,Num3
+MOV AH,9
+INT 21H
+
+SUB BL,30H
+SUB CL,30H
+
+MOV AL,CL
+
+MUL BL
+
+Add AL,30H
+
+MOV Dl,Al
+MOV AH,2
+INT 21H
+
+MOV AH,4CH
+INT 21H 
+
+
+ENDs
+End Start
